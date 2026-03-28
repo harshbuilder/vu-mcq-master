@@ -1,0 +1,31 @@
+{
+  "name": "VU MCQ Master",
+  "short_name": "MCQ Master",
+  "description": "Smart MCQ Practice for Vikram University Students",
+  "start_url": "/vu-mcq-master/",
+  "scope": "/vu-mcq-master/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d0f1a",
+  "theme_color": "#f5a623",
+  "lang": "en",
+  "categories": ["education"],
+  "icons": [
+    { "src": "icons/icon-72.png",  "sizes": "72x72",   "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-114.png", "sizes": "114x114", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-120.png", "sizes": "120x120", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-128.png", "sizes": "128x128", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-144.png", "sizes": "144x144", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-152.png", "sizes": "152x152", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "BBA 3rd Year",
+      "short_name": "BBA 3rd",
+      "url": "/vu-mcq-master/",
+      "icons": [{ "src": "icons/icon-128.png", "sizes": "128x128" }]
+    }
+  ]
+}
