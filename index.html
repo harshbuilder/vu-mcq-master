@@ -1382,7 +1382,7 @@ function renderHome(){
       let statusIcon = prog.done?'✅':(isPayLocked?'🔒':(unlocked?'▶️':'🔒'));
       let badge = isFreeLevel
         ? `<span class="level-badge badge-free">FREE</span>`
-        : (isPaidUser ? `` : `<span class="level-badge badge-locked">₹129</span>`);
+        : (isPaidUser ? `` : `<span class="level-badge badge-locked">₹99</span>`);
       return `<div class="${cardClass}" onclick="${clickAction}">
         <div class="level-top">
           <div class="level-num">Level ${i+1}${badge}</div>
@@ -2427,7 +2427,7 @@ async function checkUserPlanOnResume(){
         updateUserBar(window.vuUserEmail, isStillPaid);
         updateAboutSection(window.vuUserEmail, isStillPaid, d.expiryDate);
         renderHome();
-        if(!isStillPaid) showToast('⚠️ Your access has expired. Renew for ₹129!');
+        if(!isStillPaid) showToast('⚠️ Your access has expired. Renew for ₹99!');
       }
     }
   } catch(e){ console.log('Resume check failed:', e); }
