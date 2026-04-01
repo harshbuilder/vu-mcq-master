@@ -1,11 +1,11 @@
 // ============================================
-// VU MCQ Master — Service Worker v1.0
+// VU MCQ Master — Service Worker v2.0
 // Offline support + Smart caching
 // ============================================
 
-const CACHE_NAME = 'vu-mcq-master-v1';
-const STATIC_CACHE = 'vu-static-v1';
-const DYNAMIC_CACHE = 'vu-dynamic-v1';
+const CACHE_NAME = 'vu-mcq-master-v2';  // ✅ Bumped to v2 — forces cache refresh
+const STATIC_CACHE = 'vu-static-v2';
+const DYNAMIC_CACHE = 'vu-dynamic-v2';
 
 // Files to cache immediately on install
 const STATIC_ASSETS = [
@@ -16,7 +16,7 @@ const STATIC_ASSETS = [
 
 // ===== INSTALL — Cache static assets =====
 self.addEventListener('install', event => {
-  console.log('[SW] Installing VU MCQ Master Service Worker...');
+  console.log('[SW] Installing VU MCQ Master Service Worker v2...');
   event.waitUntil(
     caches.open(STATIC_CACHE).then(cache => {
       console.log('[SW] Caching static assets');
@@ -25,12 +25,12 @@ self.addEventListener('install', event => {
       });
     })
   );
-  self.skipWaiting();
+  self.skipWaiting(); // ✅ Activate immediately
 });
 
-// ===== ACTIVATE — Clean old caches =====
+// ===== ACTIVATE — Clean ALL old caches =====
 self.addEventListener('activate', event => {
-  console.log('[SW] Activating VU MCQ Master Service Worker...');
+  console.log('[SW] Activating VU MCQ Master Service Worker v2...');
   event.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(
@@ -43,7 +43,7 @@ self.addEventListener('activate', event => {
       );
     })
   );
-  self.clients.claim();
+  self.clients.claim(); // ✅ Take control immediately
 });
 
 // ===== FETCH — Smart cache strategy =====
@@ -60,7 +60,7 @@ self.addEventListener('fetch', event => {
     url.hostname.includes('firebase') ||
     url.hostname.includes('firestore') ||
     url.hostname.includes('razorpay') ||
-    url.hostname.includes('googleapis.com') && url.pathname.includes('firestore')
+    (url.hostname.includes('googleapis.com') && url.pathname.includes('firestore'))
   ) {
     event.respondWith(fetch(request));
     return;
@@ -94,7 +94,6 @@ self.addEventListener('fetch', event => {
           // Offline: serve from cache
           return caches.match(request).then(cached => {
             if (cached) return cached;
-            // Fallback to root index
             return caches.match('/vu-mcq-master/index.html');
           });
         })
@@ -106,7 +105,6 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(request).then(cached => {
       return cached || fetch(request).then(response => {
-        // Cache dynamic resources
         if (response.status === 200) {
           const clone = response.clone();
           caches.open(DYNAMIC_CACHE).then(cache => {
@@ -115,7 +113,6 @@ self.addEventListener('fetch', event => {
         }
         return response;
       }).catch(() => {
-        // Return cached version if available
         return caches.match(request);
       });
     })
@@ -147,4 +144,4 @@ self.addEventListener('notificationclick', event => {
   );
 });
 
-console.log('[SW] VU MCQ Master Service Worker loaded ✅');
+console.log('[SW] VU MCQ Master Service Worker v2 loaded ✅');
